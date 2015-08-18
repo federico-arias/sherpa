@@ -1,0 +1,25 @@
+{% extends "tasker/header.html" %}
+
+{% block content %}
+                <div class="span9">
+                    <div class="content">
+                        <div class="module">
+                            <div class="module-body">
+                            <form method="POST" enctype="multipart/form-data">
+                                <h2>Nueva Tarea</h2>
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit">Agregar Tarea</button>
+                            </form>
+                        </div>
+                        </div>
+                        </div>
+                        <!--/.content-->
+                    </div>
+                    <!--/.span9-->
+                </div>
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.wrapper-->
+{% endblock %}

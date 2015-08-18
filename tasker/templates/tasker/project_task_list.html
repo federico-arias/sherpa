@@ -1,0 +1,82 @@
+﻿{% extends "tasker/header.html" %}
+{% load staticfiles %}
+
+{% block content %}
+                <div class="span9">
+                    <div class="content">
+                        <div class="module">
+                            <div class="module-head">
+                                {% with object_list|first as t %}
+                                <h3> Tareas para el proyecto <u>{{ t.project.name }}</u></h3>
+                                {% endwith %}
+                            </div>
+                            <div class="module-option clearfix">
+                                <form>
+                                <div class="input-append pull-left">
+                                    <input type="text" class="span3" placeholder="Filter by name...">
+                                    <button type="submit" class="btn">
+                                        <i class="icon-search"></i>
+                                    </button>
+                                </div>
+                                </form>
+                                    <div class="pull-right">
+                                        <a href="{% url 'projects-tasks-create'  ppk %}" class="btn btn-primary">Crear Tarea</a>
+                                    </div>
+                                <!--
+                                <div class="btn-group pull-right" data-toggle="buttons-radio">
+                                    <button type="button" class="btn">
+                                        All</button>
+                                    <button type="button" class="btn">
+                                        Male</button>
+                                    <button type="button" class="btn">
+                                        Female</button>
+                                </div>
+                                -->
+                            </div>
+                            <div class="module-body">
+                                {% for task in object_list %} 
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="media user">
+                                            <a class="media-avatar pull-left" href="#">
+                                                {% with task.assigned_to.photo|default:'user.png' as profile %}
+                                                <img src="{% static  profile %}
+                                                {% endwith %}">
+                                            </a>
+                                            <div class="media-body">
+                                                <h3 class="media-title">
+                                                    {{ task.tasktype.name }}
+                                                </h3>
+                                                <p>
+                                                <small class="muted">{{ task.state }}</small></p>
+                                                <div class="media-option btn-group shaded-icon">
+
+                                                    <a href="{{ task.attached_source }}">
+                                                        <button class="btn btn-small">
+                                                            <i class="icon-download"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="{% url 'task-attachment-create' task.pk %}"> 
+                                                    <button class="btn btn-small">
+                                                        <i class="icon-upload"></i>
+                                                    </button>
+                                                    </a>
+                                                    <a href="{% url 'task-responsible-update' task.pk %}"> 
+                                                    <button class="btn btn-small">
+                                                        <i class="icon-user"></i>
+                                                    </button>
+                                                    </a>
+                                                </div>
+                                            </div> <!-- media body-->
+                                        </div> <!-- media user -->
+                                    </div> <!-- span -->
+                                </div> <!--/.row-fluid-->
+                                {% endfor %}
+                            </div> <!-- module body -->
+                        </div> <!-- module -->
+                    </div> <!--/.content-->
+                </div> <!--/.span9-->
+            </div>
+        </div> <!--/.container-->
+    </div> <!--/.wrapper-->
+{% endblock %}

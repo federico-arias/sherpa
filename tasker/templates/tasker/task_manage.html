@@ -1,0 +1,80 @@
+﻿{% extends "tasker/header.html" %}
+
+{% block content %}
+        <div class="span9">
+            <div class="content">
+
+                <div class="module message">
+                    <div class="module-head">
+                        <h3>Gestión semanal</h3>
+                    </div>
+                    <div class="module-option clearfix">
+                        <!--j
+                        <p>Esta herramienta permite dos acciones:</p>
+                        <ul>
+                            <li>Actualizar tareas atrasadas. (cambiar due_date)</li>
+                            <li>Asignar tareas disponibles</li>
+                        </ul>
+                        -->
+
+                        <div class="pull-left">
+                            <div class="btn-group">
+                                <button class="btn">Filtrar</button>
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Todas</a></li>
+                                    <li><a href="#">Atrasadas</a></li>
+                                    <li><a href="#">Sin asignar</a></li>
+                                    <li class="divider"></li>
+                                    <!--
+                                        <li><a href="#">New task</a></li>
+                                        <li><a href="#">Overdue Task</a></li>
+                                    -->
+                                </ul>
+                            </div>
+                        </div>
+                        <!--
+                            <div class="pull-right">
+                            <a href="#" class="btn btn-primary">Create Task</a>
+                            </div>
+                        -->
+                    </div>
+                    <div class="module-body table">								
+
+                        <table class="table table-message">
+                            <tbody>
+                                <tr class="heading">
+                                    <td class="cell-icon"></td>
+                                    <td class="cell-title">Tarea</td>
+                                    <td class="cell-status hidden-phone hidden-tablet">Estado</td>
+                                    <td class="cell-time align-right">Deadline</td>
+                                </tr>
+                                {% for task in tasks %}
+                                <tr class="task">
+                                    <td class="cell-icon"><i class="icon-checker high"></i></td>
+                                    <td class="cell-title"><div>{{ task.name }} de <u>{{ task.project }}</u></div></td>
+                                    <td class="cell-status hidden-phone hidden-tablet"><b class="{{ task.status }}">{{ task.status }}</b></td>
+                                    <td class="cell-time align-right">
+                                        <a href="{% url 'tasks-reschedule' %}">24-07-2015
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="module-foot">
+                    </div>
+                </div>
+
+            </div><!--/.content-->
+        </div><!--/.span9-->
+    </div><!-- /.row -->
+
+</div><!--/.container-->
+</div><!--/.wrapper-->
+{% endblock content %}

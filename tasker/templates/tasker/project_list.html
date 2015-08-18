@@ -1,0 +1,84 @@
+﻿{% extends "tasker/header.html" %}
+
+{% block content %}
+                    <div class="span9">
+                        <div class="content">
+                            <div class="module message">
+                                <div class="module-head">
+                                    <h3>Proyectos</h3>
+                                </div>
+                                <div class="module-option clearfix">
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-primary">Crear Proyecto</a>
+                                    </div>
+                                    <!--
+                                    <div class="pull-left">
+                                        <div class="btn-group">
+                                            <button class="btn">
+                                                Inbox</button>
+                                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Inbox(11)</a></li>
+                                                <li><a href="#">Sent</a></li>
+                                                <li><a href="#">Draft(2)</a></li>
+                                                <li><a href="#">Trash</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Settings</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-primary">Compose</a>
+                                    </div>
+                                    -->
+                                </div>
+                                <div class="module-body table">
+                                    <table class="table table-message">
+                                        <tbody>
+                                            <tr class="heading">
+                                                <td class="cell-icon">
+                                                </td>
+                                                <td class="cell-author hidden-phone hidden-tablet">
+                                                   Proyecto 
+                                                </td>
+                                                <td class="cell-title">
+                                                  Estado 
+                                                </td>
+                                                <td class="cell-time align-right">
+                                                   Fecha 
+                                                </td>
+                                            </tr>
+                                            {% for project in object_list %}
+                                            <tr class="unread">
+                                                <td class="cell-icon">
+                                                    <i class="icon-star"></i>
+                                                </td>
+                                                <td class="cell-author hidden-phone hidden-tablet">
+                                                    <a href="{% url 'projects-tasks-list' project.id %}">
+                                                        {{ project.name }}
+                                                    </a>
+                                                </td>
+                                                <td class="cell-title">
+                                                </td>
+                                                <td class="cell-time align-right">
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="module-foot">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.content-->
+                    </div>
+                    <!--/.span9-->
+                </div>
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.wrapper-->
+{% endblock content %}
