@@ -5,7 +5,7 @@ import shutil, os, sys
 
 
 def slug(context, s):
-    return slugify(s.encode())
+    return slugify(s.encode('utf-8', 'ignore').decode('utf-8', 'ignore'))
 
 class Unidad:
     def __init__(self, filename, stylesheet, folder):
@@ -40,4 +40,5 @@ class Unidad:
         return fname
 
     def slug(self, s):
-        return slugify(s.encode())
+        return slugify(s.encode('utf-8', 'ignore').decode('utf-8', 'ignore'))
+
