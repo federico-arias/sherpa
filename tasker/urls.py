@@ -1,8 +1,9 @@
 from django.conf.urls import url
-from .views import *
+from tasker.views import *
 
 urlpatterns = [
     url(r'^projects/$', ProjectsList.as_view(), name='projects-list'), 
+    url(r'^projects/create/$', ProjectsCreate.as_view(), name='project-create'), 
     url(r'^projects/(\d+)/tasks/create/$', ProjectsTasksCreate.as_view(), name='projects-tasks-create'), 
     url(r'^projects/(\d+)/tasks/list/$', ProjectsTasksList.as_view(), name='projects-tasks-list'), 
     url(r'^tasks/(\d+)/attachment/create', TasksAttachmentsCreate.as_view(), name='task-attachment-create'),

@@ -7,23 +7,33 @@ import os
 class ProjectsList(ListView):
     model=Project
 
+
 class ProjectsTasksCreate(CreateView):
     model=Task
     fields=('tasktype', 'due_date', 'attached_source', 'project')
+    def form_valid(self, form):
+         self.object = form.save(commit=False)
+         self.object.project = Project.objects.filter(pk__exact=self.args[0])[0]
+         self.object.save()
+         return super(ProjectsTasksCreate, self).form_valid(form)
+
+class ProjectsCreate(CreateView):
+    model=Project
+    fields=['name','url']
+
 
 class ProjectsTasksList(ListView):
     model=Task
     template_name='tasker/project_task_list.html'
-
     def get_queryset(self):
         queryset = super(ProjectsTasksList, self).get_queryset()
         return queryset.filter(project=self.args[0])
-
     def get_context_data(self, **kwargs):
         context = super(ProjectsTasksList, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['ppk'] = self.args[0] 
         return context
+
 
 class TasksAttachmentsCreate(View):
     def get(self, request, *args):

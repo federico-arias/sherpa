@@ -29,6 +29,8 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/projects/%i/tasks/list/" % self.pk
 
 @python_2_unicode_compatible
 class Responsible(models.Model):

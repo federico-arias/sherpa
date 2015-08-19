@@ -5,14 +5,16 @@ import shutil, os, sys
 
 
 def slug(context, s):
-    return slugify(s)
+    return slugify(s.encode())
 
 class Unidad:
     def __init__(self, filename, stylesheet, folder):
         self.stylesheet = os.path.join(settings.MEDIA_ROOT, stylesheet)
         self.filename = os.path.join(settings.MEDIA_ROOT, filename)
         self.folder = os.path.join(settings.MEDIA_ROOT, os.path.dirname(filename), folder)
-        os.makedirs(self.folder)
+        if not os.path.exists(self.folder):
+            os.makedirs(self.folder)
+
         self.xml = etree.parse(self.filename)
         self.parse_xml()
 
@@ -38,4 +40,4 @@ class Unidad:
         return fname
 
     def slug(self, s):
-        return slugify(s)
+        return slugify(s.encode())
