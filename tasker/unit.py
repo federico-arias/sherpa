@@ -3,7 +3,6 @@ from django.conf import settings
 from slugify import slugify
 import shutil, os, sys
 
-
 def slug(context, s):
     return slugify(s.encode('utf-8', 'ignore').decode('utf-8', 'ignore'))
 
@@ -13,7 +12,8 @@ class Unidad:
         self.filename = os.path.join(settings.MEDIA_ROOT, filename)
         self.folder = os.path.join(settings.MEDIA_ROOT, os.path.dirname(filename), folder)
         if not os.path.exists(self.folder):
-            os.makedirs(self.folder)
+            # os.makedirs(self.folder)
+            shutil.copytree(os.path.join(settings.MEDIA_ROOT, 'vendor'), self.folder)
 
         self.xml = etree.parse(self.filename)
         self.parse_xml()
