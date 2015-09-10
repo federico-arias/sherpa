@@ -4,6 +4,7 @@ from .unit import Unidad
 from django.http import FileResponse, HttpResponse
 import os
 
+
 class ProjectsList(ListView):
     model=Project
 
@@ -16,6 +17,7 @@ class ProjectsTasksCreate(CreateView):
          self.object.project = Project.objects.filter(pk__exact=self.args[0])[0]
          self.object.save()
          return super(ProjectsTasksCreate, self).form_valid(form)
+
 
 class ProjectsCreate(CreateView):
     model=Project
@@ -50,6 +52,16 @@ class TasksResponsiblesUpdate(UpdateView):
     model=Task
     fields=['assigned_to',]
 
+
 #class TasksGenerateProject(View):
 #    pass
     #cope(request.filename)
+
+class Cepillo(View):
+    def get(self, request):
+        # display Form based on model
+        pass
+    def post(self, request):
+#handle file upload & return file
+        pass
+

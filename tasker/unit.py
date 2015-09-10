@@ -16,6 +16,10 @@ class Unidad:
             shutil.copytree(os.path.join(settings.MEDIA_ROOT, 'vendor'), self.folder)
 
         self.xml = etree.parse(self.filename)
+        self.url=[]
+        self.url.append(self.xml.xpath('/temas/meta[1]/courseurl')[0].text)
+        self.url.append(self.xml.xpath('/temas/meta[1]/bibliotecaurl')[0].text)
+        self.url.append(self.xml.xpath('/temas/meta[1]/course')[0].text)
         self.parse_xml()
 
     def parse_xml(self):
@@ -30,7 +34,13 @@ class Unidad:
 
     def create_files(self, node, xslt):
         node = etree.ElementTree(node)
-        webpage = xslt(node, inicio="'1'", biblio="'2'")
+        inicio=etree.XSLT.strparam(self.url[0])
+        biblio=etree.XSLT.strparam(self.url[1])
+        curso=etree.XSLT.strparam(self.url[2])
+        webpage = xslt(node,\
+                inicio=inicio,\
+                biblio=biblio, \
+                curso=curso) 
         name = self.slug(node.find('filename').text)
         webpage.write(os.path.join(self.folder, name + '.html'))
 

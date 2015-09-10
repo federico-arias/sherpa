@@ -7,4 +7,5 @@ node_modules
 py2env
 .*.swp
 .*.swo
-media/
+/media/*
+!/media/minsal.xsl

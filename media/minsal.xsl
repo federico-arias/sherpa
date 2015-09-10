@@ -8,8 +8,9 @@ xmlns:f="urn:federico"
 extension-element-prefixes="f"
 >
 
+<xsl:param name="inicio"/>
 <xsl:param name="biblio"/>
-<xsl:param name="inicio" />
+<xsl:param name="curso"/>
 
 <xsl:output 
  method="html"
@@ -36,7 +37,7 @@ extension-element-prefixes="f"
         &lt;!--[if IE 8]&gt;         &lt;html class="no-js lt-ie9"&gt;
             &lt;link rel="stylesheet" href="css/ie8.css"&gt;
         &lt;![endif]--&gt;
-        &lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html class="no-js"&gt; &lt;!--&lt;![endif]--&gt;
+        &lt;!--[if gt IE 8]&gt; &lt;html class="no-js"&gt; &lt;![endif]--&gt;
     </xsl:text>
     <head>
         <meta charset="utf-8" />
@@ -116,7 +117,7 @@ extension-element-prefixes="f"
                                 <xsl:attribute name="href">
                                     <xsl:value-of select="$inicio" />
                                 </xsl:attribute>
-                                <xsl:text>Curso</xsl:text>
+                                <xsl:value-of select="$curso" />
                             </a>
                         </li>
 						<li class="sep">/</li>
@@ -146,6 +147,14 @@ extension-element-prefixes="f"
                             <xsl:value-of select="title"/>
                         </h3>
 						<div class="contenido">
+                            <xsl:text disable-output-escaping="yes">
+                            &lt;!--[if lte IE 8]&gt; 
+                            ¡Atención!. Tu navegador no está actualizado. Tiene conocidas fallas de seguridad y podría no mostrar todas las características de este y otros sitios web. 
+                            </xsl:text>
+                            <a href="https://browser-update.org/es/update.html">Aprende cómo puedes actualizar tu navegador</a>.
+                            <xsl:text disable-output-escaping="yes">
+                                &lt;![endif]--&gt;
+                            </xsl:text>
                             <xsl:apply-templates select="content" />
 						</div>
 					</div>
@@ -241,18 +250,7 @@ extension-element-prefixes="f"
 	</footer>
 
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"><xsl:comment></xsl:comment></script>
-<script type="text/javascript" src="js/main.js"><xsl:comment></xsl:comment></script>
-
-<script type="text/javascript">
-  window.___gcfg = {lang: 'es-419'};
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/platform.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
-
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script type="text/javascript" src="js/main.js"><xsl:comment></xsl:comment></script>
 
     </body>
     </html>
@@ -274,9 +272,19 @@ extension-element-prefixes="f"
 
 <xsl:template match="menu-item">
     <li>
+        <xsl:if test="submenu">
+            <xsl:attribute name="class">
+                <xsl:text>parent</xsl:text>
+            </xsl:attribute>
+        </xsl:if>
         <xsl:if test="attribute::active = 'yes'">
             <xsl:attribute name="class">
                 <xsl:text>active</xsl:text>
+            </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="attribute::active = 'yes' and submenu">
+            <xsl:attribute name="class">
+                <xsl:text>active parent</xsl:text>
             </xsl:attribute>
         </xsl:if>
         <a>
